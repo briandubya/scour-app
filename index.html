@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>River Sections SPA</title>
+    <link rel="stylesheet" href="styles/style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>River Channel Scour Assessment</h1>
+    <div class="container">
+        <div class="form-container">
+            <form id="sectionForm">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="sectionName" required>
+                </div>
+                <div>
+                    <label for="velocity">Velocity (m/s):</label>
+                    <input type="number" id="velocity" step="any" required>
+                </div>
+                <div>
+                    <label for="flowRate">Flow Rate (m³/s):</label>
+                    <input type="number" id="flowRate" step="any" required>
+                </div>
+                <div>
+                    <label for="invertElevation">Invert Elevation (mAD):</label>
+                    <input type="number" id="invertElevation" step="any" required>
+                </div>
+                <div>
+                    <label for="dsReachInvertElevation">DS Reach Invert Elevation (mAD):</label>
+                    <input type="number" id="dsReachInvertElevation" step="any" required>
+                </div>
+                <div>
+                    <label for="dsReachLength">DS Reach Length (m):</label>
+                    <input type="number" id="dsReachLength" step="any" required>
+                </div>
+                <div>
+                    <label for="waterLevel">Water Level (mAD):</label>
+                    <input type="number" id="waterLevel" step="any" required>
+                </div>
+                <div>
+                    <label for="bankSlope">Bank Slope:</label>
+                    <input type="number" id="bankSlope" step="any" required>
+                </div>
+                <div>
+                    <label for="revetmentType">Revetment Type:</label>
+                    <select id="revetmentType">
+                        <option value="riprap">Riprap</option>
+                        <option value="gabion">Gabion</option>
+                        <option value="concrete">Concrete</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="ti">Turbulence Intensity (TI):</label>
+                    <input type="number" id="ti" list="tiList" min="0.12" max="0.6" placeholder="1.2" required/>
+                    <datalist id="tiList">
+                        <option value="0.12"></option>
+                        <option value="0.2"></option>
+                        <option value="0.35"></option>
+                        <option value="0.5"></option>
+                        <option value="0.6"></option>
+                      </datalist>
+                </div>
+                <div>
+                    <label for="kt">Chosen KT:</label>
+                    <input type="number" id="kt" list="ktList" min="1.0" max="3.0" placeholder="1.0" required/>
+                    <datalist id="ktList">
+                        <option value="1.0"></option>
+                        <option value="1.5"></option>
+                        <option value="2.0"></option>
+                        <option value="2.5"></option>
+                        <option value="3.0"></option>
+                      </datalist>
+                </div>
+                <div>
+                    <label for="bdrylayer">Boundary Layer:</label>
+                    <select id="bdrylayer">
+                        <option value="full">Full</option>
+                        <option value="disrupted">Disrupted</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="zone">Protection Zone:</label>
+                    <select id="zone">
+                        <option value="continuous">Continuous</option>
+                        <option value="transition">Transition</option>
+                    </select>
+                </div>
+                <button id="addSectionButton" type="button">Add Section</button>
+            </form>
+        </div>
+        <div class="table-container">
+            <table id="sectionsTable">
+                <table id="sectionsTable">
+                    <thead>
+                        <tr>
+                            <th>Section Name</th>
+                            <th>Velocity (m/s)</th>
+                            <th>Flow Rate (m³/s)</th>
+                            <th>Invert Elevation (mAD)</th>
+                            <th>DS Reach Invert Elevation (mAD)</th>
+                            <th>DS Reach Length (m)</th>
+                            <th>Water Level (mAD)</th>
+                            <th>Dn50Esca</th>
+                            <th>Dn50Pilarzick</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sectionsTableBody">
+                        <!-- Sections will be displayed here -->
+                    </tbody>
+                </table>
+            </table>
+            <div class="button-container">
+                <input type="file" id="jsonFileInput" accept=".json">
+                <button id="uploadJsonButton" class="small-button">Upload JSON</button>
+                <button id="downloadJsonButton" class="small-button">Download JSON</button>
+            </div>
+        </div>
+    </div>
+    
+    <h2>Graph</h2>
+    <canvas id="resultGraph"></canvas>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>
