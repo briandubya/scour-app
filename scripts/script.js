@@ -175,6 +175,10 @@ function addSection() {
 
     const sectionName = formData.sectionName;
     const velocity = formData.velocity;
+    if (velocity > 4) {
+        alert("Velocity cannot exceed 4 m/s.");
+        return; // Stop the function if the velocity is too high
+    }
     const flowRate = formData.flowRate;
     const invertElevation = formData.invertElevation;
     const dsReachInvertElevation = formData.dsReachInvertElevation;
@@ -345,16 +349,19 @@ function updateGraph() {
         labels: ds_reach_lengths,
         datasets: [{
             label: 'escMay Value',
+            stepped: true,
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: escMayValues
         }, {
             label: 'Pilarz Value',
+            stepped: true,
             backgroundColor: 'rgb(54, 162, 235)',
             borderColor: 'rgb(54, 162, 235)',
             data: pilarzValues
         }, {
             label: 'Average',
+            stepped: true,
             backgroundColor: 'rgb(0, 162, 0)',
             borderColor: 'rgb(0, 162, 0)',
             data: average
